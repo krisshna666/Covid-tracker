@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Document</title>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript">
+       $(document).ready(function(){
+        var selectval=$("#selectives").val();
+     
+              $.get("https://api.covid19api.com/summary",function(data){
+                // var datas = data[2].name;
+              //     // ajexnametosend = data; 
+                  // for(var datas in data)
+                  // {
+                  //     jQuery.parseJSON(data[datas]).toString();
+                  // }
+                 
+
+                  var data2=JSON.stringify(data);
+                  var data1=JSON.parse(data2);
+                  for(var inc=0;inc<data1.Countries.length;inc++)
+                  {
+
+                $("#selectives").append('<option>'+data1.Countries[inc].Country+'</option>');
+                  }
+
+      
+            
+         
+        });
+       });
+    </script>
+    <style>
+      @media only screen and (max-width:768px)
+      {
+      #selectives{
+        margin-top: 20px;
+        margin-left: 100px;
+      }
+      #demofull,#demofull2{
+        margin-left:20px;
+        position: relative;
+      }
+      #a1,#a2{
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        display: none;
+              }
+              #virus{
+                width: 400px;
+                height: 400px;
+              }
+      }
+      @media only screen and (max-width:812x)
+      {
+      #selectives{
+        margin-top: 20px;
+        margin-left: 50px;
+      }
+      #demofull,#demofull2{
+        margin-left:10px;
+        position: relative;
+        width: 100px;
+      }
+      #a1,#a2{
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        display: none;
+              }
+      }
+    </style>
+</head>
+<body>
+  <center><div id="main"></div></center>
+  <select style="height: 30px;" class="form-select" aria-label="Default select example" id="selectives">
+    <option selected>Open this select menu</option>
+  </select>
+
+    <span><button id="btn" onclick="sri()"><i class="fa fa-search" aria-hidden="true"></i></button></span><br><br>
+    
+      
+    <div id="demofull"></div><img id="a1" style="margin-left: 100px;margin-top: -100px;" src="./—Pngtree—vector up arrow icon_4231914.png" ><br>
+    
+    <div id="demofull2"></div><img id="a2"  style="margin-left: 100px;margin-top: -100px;" src="—Pngtree—vector down arrow icon_4184901.png">
+     
+<img id="virus" src="pale-virus-test.png">   
+    <center><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Corona Virus</div></center>
+    <div>This tracker helps to track corona spreads across 200+ countries providing updated information to stay cautious amidst the pandemic</div>
+    </body>
+ <script>
+   function sri()
+   {
+     var selectives=document.getElementById("selectives");
+     var selectval=selectives.value;
+    var demofull=document.getElementById("demofull");
+    var a1=document.getElementById("a1");
+    var a2=document.getElementById("a2");
+
+     var http = new XMLHttpRequest();
+             http.open("get","https://api.covid19api.com/summary");
+         
+        var main=document.getElementById("main");
+        main.innerHTML="Fetching data for"+" " +"<b>"+selectval+"</b>";
+         
+             http.onreadystatechange = function()
+             {
+                 if(this.readyState==4 && this.status==200)
+                 {
+                     var datas=this.responseText;
+                     var subs=JSON.parse(datas);
+                 
+                     for(var inds=0;inds<subs.Countries.length;inds++)
+     {
+   if(selectval.includes(subs.Countries[inds].Country))
+   {
+     demofull.style.width="350px";
+     demofull.style.height="200px";
+     demofull.style.backgroundColor="red";
+     demofull.style.boxShadow="100px 10px -100px gray";
+     demofull2.style.width="350px";
+     demofull2.style.height="200px";
+     demofull2.style.backgroundColor="green";
+     demofull.style.paddingTop="50px";
+     demofull.style.paddingLeft="100px";
+     demofull.style.fontSize="2.5em";
+     demofull.style.fontWeight="bold";
+     demofull2.style.paddingTop="50px";
+     demofull2.style.paddingLeft="100px";
+     demofull2.style.fontSize="2.5em";
+     demofull2.style.fontWeight="bold";
+
+      demofull.innerHTML="Confirmed:<br>&nbsp;&nbsp;&nbsp;&nbsp;"+subs.Countries[inds].TotalConfirmed;
+      demofull2.innerHTML="Recovered:<br>&nbsp;&nbsp;&nbsp;&nbsp;" +subs.Countries[inds].TotalRecovered;
+    
+        a1.style.display="block";
+        a2.style.display="block";
+      
+   }
+   }
+  }
+                  }
+                
+  http.send();
+  }
+ </script>
+</html>
