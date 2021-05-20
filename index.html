@@ -128,7 +128,7 @@ body{
 <img id="virus" src="pale-virus-test.png">   
     <center><div class="simpletext" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Corona Virus</div></center>
     <div class="simpletext">This tracker helps to track corona spreads across 200+ countries providing updated information to stay cautious amidst the pandemic</div>
-    <br>
+    <br><br>
     <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
   
   </body>
@@ -184,8 +184,8 @@ body{
         var xValues = ["TotalConfirmed", "TotalRecovered", "NewConfirmed", "NewRecovered"];
 var yValues = [subs.Countries[inds].TotalConfirmed,subs.Countries[inds].TotalRecovered,subs.Countries[inds].NewConfirmed,subs.Countries[inds].NewRecovered];
 var barColors = [
-  "#b91d47",
-  "#00aba9",
+  "red",
+  "green",
   "#2b5797",
   "#e8c3b9",
   "#1e7145"
@@ -203,7 +203,7 @@ new Chart("myChart", {
   options: {
     title: {
       display: true,
-      text: "World Wide Wine Production 2018"
+      text: "Data Visualizer for covid-19"
     }
   }
 });
