@@ -181,12 +181,18 @@ body{
     
       
         a2.style.display="block";
-        var xValues = ["Confirmed", "Recovered","NewConfirmed","NewRecovered"];
+        var xValues = ["TotalConfirmed", "TotalRecovered", "NewConfirmed", "NewRecovered"];
 var yValues = [subs.Countries[inds].TotalConfirmed,subs.Countries[inds].TotalRecovered,subs.Countries[inds].NewConfirmed,subs.Countries[inds].NewRecovered];
-var barColors = ["red", "green","blue","orange","brown"];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
 
 new Chart("myChart", {
-  type: "bar",
+  type: "pie",
   data: {
     labels: xValues,
     datasets: [{
@@ -195,10 +201,9 @@ new Chart("myChart", {
     }]
   },
   options: {
-    legend: {display: false},
     title: {
       display: true,
-      text: "Covid data visualizer"
+      text: "World Wide Wine Production 2018"
     }
   }
 });
